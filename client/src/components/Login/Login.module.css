@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+.auth {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(211, 211, 211);
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    background: #00b9e794;
+    padding: 2px;
+    margin:  20px;
+    border-radius: 10px;
+}
+.container h1{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 6px;
+    border-bottom: solid 1px white;
+}
+
+.main{
+    display:grid;
+    justify-content:center;
+    padding: 40px 10px;
+}
+
+.main div{
+
+    display: grid;
+    width: 50%;
+    padding-bottom: 15px;
+
+}
+.main div label{
+
+    width: 95%;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 5px 50px;
+
+}
+.main div input{
+
+   height: 40px;
+   width: 95%;
+   border-radius: 7px;
+   outline: none;
+   border: 1px solid grey;
+   padding:  0 10px;
+   margin: 5px 50px;
+}
+.btnSubmit{
+    margin-top: 40px;
+}
+.btnSubmit input{
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    color: black;
+    background: rgb(211, 211, 211);
+}
+.btnSubmit input:hover{
+  background: rgb(175, 175, 175);
+  cursor: pointer;
+}

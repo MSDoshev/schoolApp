@@ -41,6 +41,7 @@
     text-align: center;
     margin: 2px;
     font-family: "Montserrat", sans-serif;
+    position: relative;
 }   
 .main article a{
     border: none;
@@ -52,6 +53,10 @@
     margin-right: auto;
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
+    position: absolute;
+    bottom:0px;
+    right: 0px;
+
   
 }   
 .main article a:hover{
