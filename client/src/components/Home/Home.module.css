@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-.main div{
+.main div:nth-child(1){
     background-image: url("https://media.npr.org/assets/img/2017/08/18/istock-586379824_custom-741b39cd56655a0f4bbd70245b26576c774b4049-s1100-c50.jpg");
     padding: 300px 400px;
     background-size: cover;
@@ -22,7 +22,8 @@
     padding: 15px 60px;
     font-size: x-large;
     text-decoration: none;
-    font-family: "Montserrat", sans-serif;;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 10px;
 }
 .main a:hover{
     background-color: #0193b8;
@@ -32,23 +33,28 @@
     transition: all 0.3s ease 0s;
 }
 
-.main article{
-    background-color: #00b9e7;
-    color: white;
-    width: 40%;
-    padding: 92.4px;
-    display: inline-block;
-    text-align: center;
-    margin: 2px;
-    font-family: "Montserrat", sans-serif;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 250px;
+    box-sizing: border-box;
+    
     position: relative;
-}   
-.main article a{
+    
+} 
+.grid article{
+    background:#00b9e7;
+    position: relative;
+    border-radius: 10px;
+    margin: 5px;
+} 
+.grid article a{
     border: none;
+    border-radius: 10px;
     background-color: #02a3c7;
     font-weight: bold;
     color: white;
-    padding: 15px 60px;
+    padding: 15px 40px;
     font-size: x-large;
     margin-right: auto;
     text-decoration: none;
@@ -56,18 +62,18 @@
     position: absolute;
     bottom:0px;
     right: 0px;
-
-  
-}   
-.main article a:hover{
-    border: none;
-    background-color: #0c323b;
-    font-weight: bold;
-    color: white;
-    padding: 15px 60px;
-    font-size: x-large;
-    margin-right: auto;
-    text-decoration: none;
+    transition: all 0.3s ease 0s;
+}
+ 
+.grid article p{
     font-family: "Montserrat", sans-serif;
-  
-}   
+    font-size: larger;
+    color: white;
+    margin:10px;
+}
+.grid article h2{
+    font-family: "Montserrat", sans-serif;
+    font-size: xx-large;
+    color: white;
+    margin:10px;
+}

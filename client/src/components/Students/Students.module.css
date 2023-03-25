@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+.catalogPage{
+    font-family: "Montserrat", sans-serif;
+}
+.catalogPage h1{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 6px;
+    border-bottom: solid 1px #00b9e794;
+}
+.allGames{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    box-sizing: border-box;
+    padding: 16px;
+    gap: 10px
+}
+.allGamesInfo img{
+    width: 100%;
+    height: 70%;
+    border-radius: 10px;
+}
+
+.allGamesInfo{ 
+    position: relative;
+    background-color: #00b9e794;
+    border-radius: 10px;
+}
+.detailsButton{
+    border: none;
+    border-radius: 10px;
+    background-color: #02a3c7;
+    font-weight: bold;
+    color: white;
+    padding: 15px 40px;
+    font-size: x-large;
+    margin-right: auto;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    position: absolute;
+    bottom:0px;
+    right: 0px;
+    transition: all 0.3s ease 0s;
+
+}
+.detailsButton:hover{
+    background-color: #008ead;
+}
+
+.allGamesInfo h2{
+    color: black;
+    font-weight: bold;
+    margin-left: 10px;
+
+}
+.allGamesInfo h6{
+    color: black;
+    font-weight: bold;
+    font-size: large;
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
