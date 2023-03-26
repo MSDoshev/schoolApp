@@ -1,5 +1,12 @@
+
+import styles from "./Footer.module.css";
+
 export const Footer = () => {
     return(
-        <h3>This is the footer</h3>
+        <div className={styles.main}>
+            <div className={styles.container}>
+                <p>All rights are mine</p>
+            </div>
+        </div>
     );
 }
