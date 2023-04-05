@@ -17,12 +17,22 @@ import { Register } from './components/Register/Register';
 import { StudentDetails } from './components/StudentDetails/StudentDetails';
 import { Students } from './components/Students/Students';
 import { Logout } from "./components/Logout/Logout";
+import { studentServiceFactory } from "./services/studentService";
 
 function App() {
   const navigate = useNavigate();
+  const [students, setStudents] = useState([]);
   const [auth, setAuth] = useState({});
   const authService = authServiceFactory(auth.accessToken);
+  const studentService = studentServiceFactory(auth.accessToken);
 
+   const onCreateStudentSubmit = async (data) => {        
+        const newStudent = await studentService.create(data);
+
+        setStudents(state => [...state, newStudent]);
+        navigate('/students');
+    };
+  
   const onLoginSubmit = async (data) =>{
     
     try {
@@ -79,7 +89,7 @@ const context = {
       <main>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/create' element={<Create/>}/>
+        <Route path='/create' element={<Create onCreateStudentSubmit={onCreateStudentSubmit}/>}/>
         <Route path='/students' element={<Students/>}/>
         <Route path='/students/details' element={<StudentDetails/>}/>
         <Route path='/gallery' element={<Gallery/>}/>
