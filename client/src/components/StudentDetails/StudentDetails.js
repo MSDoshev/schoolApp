@@ -7,7 +7,9 @@ import { studentServiceFactory } from "../../services/studentService";
 import { useService } from "../../hooks/useService";
 import { AuthContext } from "../../contexts/AuthContext";
 
-export const StudentDetails = () =>{
+export const StudentDetails = ({
+    deleteStudent
+}) =>{
     const { userId } = useContext(AuthContext);
     const {studentId} = useParams();
     const [student, setStudent] = useState({});
@@ -29,10 +31,17 @@ export const StudentDetails = () =>{
     const isOwner = student._ownerId === userId;
 
     const onDeleteClick = async() => {
+        //eslint-disable-next-line no-restricted-globals
+        const result = confirm(`Do you want to delete this student "${student.firstName} ${student.lastName}"`)
+       
+       if(result){
         await studentService.delete(student._id);
         
+        deleteStudent(student._id)
         navigate('/students');
+       }
     }
+
 
     return(
         <section id="game-details" className={styles.main}>
