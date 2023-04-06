@@ -21,6 +21,7 @@ import { studentServiceFactory } from "./services/studentService";
 import { EditGame } from "./components/EditStudent/EditStudent";
 import { AddPictures } from "./components/AddPictures/AddPictures";
 import { galleryServiceFactory } from "./services/galleryService";
+import { Profile } from "./components/Profile/Profile";
 
 function App() {
   const navigate = useNavigate();
@@ -142,6 +143,7 @@ const context = {
         <Route path ='/logout' element= {<Logout/> }/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/about' element={<About/>}/>
+        <Route path='/profile/:userId' element={<Profile/>}/>
       
       </Routes>
       </main>

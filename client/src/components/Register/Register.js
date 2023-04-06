@@ -8,6 +8,8 @@ export const Register = () => {
     const {onRegisterSubmit} = useContext(AuthContext)
     const {values, changeHandler, onSubmit} = useForm({
         email:'',
+        imageUrl:'',
+        fullName:'',
         password:'',
         confirmPassword: '',
         role:'teacher',
@@ -26,8 +28,31 @@ export const Register = () => {
                         type="text" 
                         id="email" 
                         name="email" 
-                        placeholder="ivan@abg.bg"
+                        placeholder="ivan@abv.bg"
                         value={values.email}
+                        onChange={changeHandler}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="fullName">Full Name:</label>
+                        <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName" 
+                        placeholder="Ivan Ivanov"
+                        value={values.fullName}
+                        onChange={changeHandler}
+                        />
+                    </div>
+                   
+                    <div>
+                        <label htmlFor="imageUrl">ImageUrl:</label>
+                        <input 
+                        type="text" 
+                        id="imageUrl" 
+                        name="imageUrl" 
+                        placeholder="http://"
+                        value={values.imageUrl}
                         onChange={changeHandler}
                         />
                     </div>
@@ -54,7 +79,7 @@ export const Register = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="kid-img">Role:</label>
+                        <label htmlFor="role">Role:</label>
                         <select id="role" name="role" value={values.role} onChange={changeHandler}>
                             <option value="teacher">Teacher</option>
                             <option value="parent">Parent</option>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export const Header = () => {
-  const {isAuthenticated, userEmail, userRole} = useContext(AuthContext);
+  const {isAuthenticated, userEmail, userRole, userId} = useContext(AuthContext);
   return (
     <nav className={styles.main}>
         <p className={styles.logo}>
@@ -23,7 +23,7 @@ export const Header = () => {
           )}
             <li><Link to="/students">Students</Link></li>
             <li><Link to="/logout">Logout</Link></li>
-            <li><Link to="#">{userEmail}</Link></li>
+            <li><Link to={`/profile/${userId}`}>{userEmail}</Link></li>
             
           </>
           )}
