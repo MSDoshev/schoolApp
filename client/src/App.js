@@ -26,6 +26,14 @@ function App() {
   const authService = authServiceFactory(auth.accessToken);
   const studentService = studentServiceFactory(auth.accessToken);
 
+  useEffect(() => {
+    studentServiceFactory(auth.accessToken).getAll()
+      .then((result) => {
+        console.log(result);
+        setStudents(result);
+      });
+  }, [auth.accessToken]);
+
    const onCreateStudentSubmit = async (data) => {        
         const newStudent = await studentService.create(data);
 
@@ -90,8 +98,8 @@ const context = {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/create' element={<Create onCreateStudentSubmit={onCreateStudentSubmit}/>}/>
-        <Route path='/students' element={<Students/>}/>
-        <Route path='/students/details' element={<StudentDetails/>}/>
+        <Route path='/students' element={<Students students={students}/>}/>
+        <Route path='/students/:studentId' element={<StudentDetails/>}/>
         <Route path='/gallery' element={<Gallery/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path ='/logout' element= {<Logout/> }/>
