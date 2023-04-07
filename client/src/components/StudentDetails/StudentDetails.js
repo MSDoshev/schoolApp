@@ -25,7 +25,7 @@ export const StudentDetails = ({
             })
            
 
-    }, [studentId, studentService]);
+    }, [studentId]);
 
 
     const isOwner = student._ownerId === userId;

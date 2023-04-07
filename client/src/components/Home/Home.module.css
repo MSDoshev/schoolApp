@@ -14,7 +14,10 @@
     font-size: xxx-large;
 
 }
-.main div a{
+.btnAbout{
+    margin: 20px;
+}
+.btnAbout a{
     border: none;
     background-color: #00b9e7;
     font-weight: bold;
@@ -24,6 +27,7 @@
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
     border-radius: 10px;
+    
 }
 .main a:hover{
     background-color: #0193b8;

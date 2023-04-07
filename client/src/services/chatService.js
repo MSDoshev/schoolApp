@@ -1,21 +1,21 @@
 import {requestFactory} from "./requester"
 
-const baseUrl = "http://localhost:3030/data/gallery"
+const baseUrl = "http://localhost:3030/data/school-chat"
 
 
-export const galleryServiceFactory = (token) => {
+export const chatServiceFactory = (token) => {
      const request = requestFactory(token);
      
      const getAll = async() =>{
 
           const result = await request.get(baseUrl)
-          const pictures = Object.values(result);
+          const messages = Object.values(result);
      
-          return pictures;
+          return messages;
      }
           
-     const create = async (pictureData) => {
-          const result = await request.post(baseUrl, pictureData);
+     const create = async (messageData) => {
+          const result = await request.post(baseUrl, messageData);
      
           return result;
      

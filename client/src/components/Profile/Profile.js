@@ -46,7 +46,7 @@ export const Profile = ({
                         {isOwner && (
 
                         <div className={styles.buttons}>
-                            <Link to={`/users/${user._id}/edit`} className={styles.aButton}>Edit</Link>
+                            <Link to={`/profile/${user._id}/edit`} className={styles.aButton}>Edit</Link>
                         </div>
                         )}
                      </div>

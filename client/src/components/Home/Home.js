@@ -12,7 +12,10 @@ export const Home = () => {
            
             <div >
                 <h1>Welcome to our school portal</h1>
+                <div className={styles.btnAbout}>
+
                 <Link to="/about">About Us</Link>
+                </div>
             </div>
             <div className={styles.grid}>
             <article>

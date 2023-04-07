@@ -7,7 +7,7 @@ import { useForm } from "../../hooks/useForm";
 
 import { useService } from "../../hooks/useService";
 import { studentServiceFactory } from "../../services/studentService";
-export const EditGame = ({
+export const EditStudent = ({
     onStudentEditSubmit,
 }) =>{
     const {studentId} = useParams();
@@ -104,7 +104,7 @@ export const EditGame = ({
                         />
                     </div>
                     <div className={styles.btnSubmit}>
-                        <input type="submit" value="Add Student"/>
+                        <input type="submit" value="Edit Student"/>
                     </div>
                 </div>
             </form>

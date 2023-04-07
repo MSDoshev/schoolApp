@@ -18,24 +18,30 @@ import { StudentDetails } from './components/StudentDetails/StudentDetails';
 import { Students } from './components/Students/Students';
 import { Logout } from "./components/Logout/Logout";
 import { studentServiceFactory } from "./services/studentService";
-import { EditGame } from "./components/EditStudent/EditStudent";
+import { EditStudent } from "./components/EditStudent/EditStudent";
 import { AddPictures } from "./components/AddPictures/AddPictures";
 import { galleryServiceFactory } from "./services/galleryService";
 import { Profile } from "./components/Profile/Profile";
+import { EditUser } from "./components/EditUser/EditUser";
+import { userServiceFactory } from "./services/userService";
+import { Chat } from "./components/Chat/Chat";
+import { chatServiceFactory } from "./services/chatService";
 
 function App() {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [pictures, setPictures] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [auth, setAuth] = useState({});
   const authService = authServiceFactory(auth.accessToken);
   const studentService = studentServiceFactory(auth.accessToken);
   const pictureService = galleryServiceFactory(auth.accessToken);
+  const userService = userServiceFactory(auth.accessToken);
+  const chatService = chatServiceFactory(auth.accessToken);
 
   useEffect(() => {
     studentServiceFactory(auth.accessToken).getAll()
       .then((result) => {
-        console.log(result);
         setStudents(result);
       });
   }, [auth.accessToken]);
@@ -43,8 +49,14 @@ function App() {
   useEffect(() => {
     galleryServiceFactory().getAll()
       .then((result) => {
-        console.log(result);
         setPictures(result);
+      });
+  }, [auth.accessToken]);
+  
+  useEffect(() => {
+    chatServiceFactory().getAll()
+      .then((result) => {
+        setMessages(result);
       });
   }, [auth.accessToken]);
 
@@ -53,6 +65,12 @@ function App() {
 
         setStudents(state => [...state, newStudent]);
         navigate('/students');
+    };
+
+   const onCreateMessageSubmit = async (data) => {        
+        const newMessage = await chatService.create(data);
+        setMessages(state => [...state, newMessage]);
+       
     };
   
    const onCreatePictureSubmit = async (data) => {        
@@ -76,12 +94,19 @@ function App() {
     setStudents(state=>state.filter(student => student._id !== studentId))
   }
 
+  const onUserEditSubmit = async (values) => {
+    console.log(values);
+    const result = await userService.edit(values._id, values);
+    console.log(`This is the result ${result}`);
+    setAuth(result);
+    navigate(`/profile/${auth._id}`);
+  }
+
 
   const onLoginSubmit = async (data) =>{
     
     try {
         const result = await authService.login(data);
-        console.log(result);
         setAuth(result);
 
         navigate('/')
@@ -113,11 +138,16 @@ const onLogout = async () => {
   setAuth({});
 
 } 
+
+
+
 const context = {
   onLoginSubmit,
   onRegisterSubmit,
   onLogout,
   userId: auth._id,
+  fullName:auth.fullName,
+  imageUrl:auth.imageUrl,
   token: auth.accessToken,
   userEmail: auth.email,
   userRole: auth.role,
@@ -136,14 +166,18 @@ const context = {
         <Route path='/create' element={<Create onCreateStudentSubmit={onCreateStudentSubmit}/>}/>
         <Route path='/students' element={<Students students={students}/>}/>
         <Route path='/students/:studentId' element={<StudentDetails deleteStudent={deleteStudent}/>}/>
-        <Route path='/students/:studentId/edit' element={<EditGame onStudentEditSubmit={onStudentEditSubmit}/>}/>
+        <Route path='/students/:studentId/edit' element={<EditStudent onStudentEditSubmit={onStudentEditSubmit}/>}/>
         <Route path='/gallery' element={<Gallery pictures={pictures}/>}/>
+        <Route path='/chat' element={<Chat messages={messages} onCreateMessageSubmit={onCreateMessageSubmit}/>}/>
+        <Route path='/gallery/create' element={<AddPictures onCreatePictureSubmit={onCreatePictureSubmit}/>}/>
         <Route path='/gallery/create' element={<AddPictures onCreatePictureSubmit={onCreatePictureSubmit}/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path ='/logout' element= {<Logout/> }/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/profile/:userId' element={<Profile/>}/>
+        <Route path='/profile/:userId/edit' element={<EditUser onUserEditSubmit={onUserEditSubmit}/>}/>
+      
       
       </Routes>
       </main>

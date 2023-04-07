@@ -16,7 +16,6 @@
     width: 100%;
     max-width: 650px;
     background: #00b9e794;
-    
     padding: 2px;
     margin:  20px;
     border-radius: 10px;
@@ -32,7 +31,7 @@
 .main{
     display:grid;
     justify-content:center;
-    padding: 10px 10px;
+    padding: 8px 10px;
 }
 
 .main div{
@@ -78,14 +77,4 @@
   background: rgb(175, 175, 175);
   cursor: pointer;
 }
-.main select{
 
-   height: 40px;
-   width: 95%;
-   border-radius: 7px;
-   outline: none;
-   border: 1px solid grey;
-   padding:  0 10px;
-   margin: 5px 50px;
-
-}
