@@ -3,6 +3,13 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 
 import {authServiceFactory} from './services/authService'
+import { chatServiceFactory } from "./services/chatService";
+import { userServiceFactory } from "./services/userService";
+import { galleryServiceFactory } from "./services/galleryService";
+import { studentServiceFactory } from "./services/studentService";
+
+import { RouteGuard } from "./components/common/RouteGuard";
+
 import { AuthContext } from "./contexts/AuthContext";
 
 
@@ -17,15 +24,13 @@ import { Register } from './components/Register/Register';
 import { StudentDetails } from './components/StudentDetails/StudentDetails';
 import { Students } from './components/Students/Students';
 import { Logout } from "./components/Logout/Logout";
-import { studentServiceFactory } from "./services/studentService";
 import { EditStudent } from "./components/EditStudent/EditStudent";
 import { AddPictures } from "./components/AddPictures/AddPictures";
-import { galleryServiceFactory } from "./services/galleryService";
 import { Profile } from "./components/Profile/Profile";
 import { EditUser } from "./components/EditUser/EditUser";
-import { userServiceFactory } from "./services/userService";
 import { Chat } from "./components/Chat/Chat";
-import { chatServiceFactory } from "./services/chatService";
+
+
 
 function App() {
   const navigate = useNavigate();
@@ -163,21 +168,25 @@ const context = {
       <main>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/create' element={<Create onCreateStudentSubmit={onCreateStudentSubmit}/>}/>
-        <Route path='/students' element={<Students students={students}/>}/>
-        <Route path='/students/:studentId' element={<StudentDetails deleteStudent={deleteStudent}/>}/>
-        <Route path='/students/:studentId/edit' element={<EditStudent onStudentEditSubmit={onStudentEditSubmit}/>}/>
         <Route path='/gallery' element={<Gallery pictures={pictures}/>}/>
-        <Route path='/chat' element={<Chat messages={messages} onCreateMessageSubmit={onCreateMessageSubmit}/>}/>
-        <Route path='/gallery/create' element={<AddPictures onCreatePictureSubmit={onCreatePictureSubmit}/>}/>
-        <Route path='/gallery/create' element={<AddPictures onCreatePictureSubmit={onCreatePictureSubmit}/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path ='/logout' element= {<Logout/> }/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/about' element={<About/>}/>
-        <Route path='/profile/:userId' element={<Profile/>}/>
-        <Route path='/profile/:userId/edit' element={<EditUser onUserEditSubmit={onUserEditSubmit}/>}/>
-      
+
+        <Route element={<RouteGuard />}>
+          <Route path='/profile/:userId' element={<Profile/>}/>
+          <Route path='/profile/:userId/edit' element={<EditUser onUserEditSubmit={onUserEditSubmit}/>}/>
+          <Route path='/chat' element={<Chat messages={messages} onCreateMessageSubmit={onCreateMessageSubmit}/>}/>
+          <Route path='/gallery/create' element={<AddPictures onCreatePictureSubmit={onCreatePictureSubmit}/>}/>
+          <Route path='/create' element={<Create onCreateStudentSubmit={onCreateStudentSubmit}/>}/>
+          <Route path='/students' element={<Students students={students}/>}/>
+          <Route path='/students/:studentId' element={<StudentDetails deleteStudent={deleteStudent}/>}/>
+          <Route path='/students/:studentId/edit' element={<EditStudent onStudentEditSubmit={onStudentEditSubmit}/>}/>
+        </Route>
+
+
+
       
       </Routes>
       </main>
