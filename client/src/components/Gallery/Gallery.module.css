@@ -3,7 +3,10 @@
 .galleryPage{
     font-family: "Montserrat", sans-serif;
 }
-.galleryPage h1{
+.title{
+    padding: 20px;
+}
+.title h1{
     font-size: 26px;
     font-weight: 600;
     text-align: center;
@@ -21,14 +24,14 @@
 
 
 }
-.galleryPage a {
+.title a {
     text-decoration: none;
     font-size: xx-large;
     background-color: #00b9e794;
-    padding: 5px 20px;
+    padding: 1px 20px;
     position: absolute;
     right: 10px;
-    top:122px;
+    top:93px;
     border-radius: 10px;
     color:white;
 
