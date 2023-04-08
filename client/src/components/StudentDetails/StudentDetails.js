@@ -32,7 +32,7 @@ export const StudentDetails = ({
 
     const onDeleteClick = async() => {
         //eslint-disable-next-line no-restricted-globals
-        const result = confirm(`Do you want to delete this student "${student.firstName} ${student.lastName}"`)
+        const result = confirm(`Do you want to delete this student "${student.fullName}"`)
        
        if(result){
         await studentService.delete(student._id);
@@ -48,11 +48,11 @@ export const StudentDetails = ({
             <div className={styles.container}>
                 <div className={styles.detailsBox}>
                     <div className={styles.image}>
-                        <img alt={`${student.firstName} ${student.lastName}`} src={student.imageUrl} />
+                        <img alt={`${student.fullName}`} src={student.imageUrl} />
                     </div>
                     <div className={styles.studentInfo}>
                         <h1>Student Details</h1>
-                        <h2 >{student.firstName} {student.lastName}</h2>
+                        <h2 >{student.fullName}</h2>
                         <div className={styles.info}>Grade: {student.grade} </div>
                         <div className={styles.info}>Age: {student.age} </div>
                         <div className={styles.info}>Average Score: {student.score} </div>

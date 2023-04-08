@@ -78,3 +78,8 @@
   cursor: pointer;
 }
 
+.formError {
+    color: red;
+    font-size: 14px;
+    margin: 5px 50px;
+  }

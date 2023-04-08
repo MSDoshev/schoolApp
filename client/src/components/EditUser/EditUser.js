@@ -10,7 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 export const EditUser = ({
     onUserEditSubmit,
 }) =>{
-    const { userId } = useContext(AuthContext);
+    const { userId, formErrors, formValidate } = useContext(AuthContext);
     
     const userService = useService(userServiceFactory);
     const {values, changeHandler, onSubmit, changeValues} = useForm({
@@ -28,6 +28,13 @@ export const EditUser = ({
             changeValues(result);
         })
    }, [userId])
+
+
+
+  
+   const disabled = Object.keys(formErrors).some(key => formErrors[key]);
+   
+
     return(
         <section id="edit-page" className={styles.auth}>
             <div className={styles.container}>
@@ -43,8 +50,14 @@ export const EditUser = ({
                         placeholder="Ivan Ivanov"
                         value={values.fullName} 
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.fullName &&
+                        <p className={styles.formError}>
+                            {formErrors.fullName}
+                        </p>
+                    }
                     <div>
                         <label htmlFor="email">Email:</label>
                         <input 
@@ -54,8 +67,14 @@ export const EditUser = ({
                         placeholder="ivan@abv.bg"
                         value={values.email} 
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.email &&
+                        <p className={styles.formError}>
+                            {formErrors.email}
+                        </p>
+                    }
                     <div>
                         <label htmlFor="user-img">Image:</label>
                         <input 
@@ -64,10 +83,17 @@ export const EditUser = ({
                         name="imageUrl" 
                         placeholder="Upload a photo..."
                         value={values.imageUrl} 
-                        onChange={changeHandler}/>
+                        onChange={changeHandler}
+                        onBlur={formValidate}
+                        />
                     </div>
+                    {formErrors.imageUrl &&
+                        <p className={styles.formError}>
+                            {formErrors.imageUrl}
+                        </p>
+                    }
                     <div className={styles.btnSubmit}>
-                        <input type="submit" value="Edit Profile"/>
+                        <input type="submit" value="Edit Profile" disabled={disabled}/>
                     </div>
                 </div>
             </form>

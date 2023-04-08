@@ -1,12 +1,14 @@
 import styles from "./Create.module.css";
 
 import { useForm } from "../../hooks/useForm";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const Create = ({
     onCreateStudentSubmit
 }) => {
+    const { formErrors, formValidate } = useContext(AuthContext);
     const {values, changeHandler, onSubmit} = useForm({
-        firstName : '',
         lastName:'',
         age: '',
         imageUrl: '',
@@ -14,35 +16,32 @@ export const Create = ({
         grade:'',
 
     }, onCreateStudentSubmit)
-    
+    const disabled = Object.keys(formErrors).some(key => formErrors[key]);
+
     return (
         <section id="create-page" className={styles.auth}>
             <div className={styles.container}>
             <h1>Add Student</h1>
             <form id="create" method="POST" onSubmit={onSubmit}>
                 <div className={styles.main}>
+                    
                     <div>
-                        <label htmlFor="first-name">First Name:</label>
+                        <label htmlFor="full-name">Full Name:</label>
                         <input 
                         type="text" 
-                        id="firstName"
-                        name="firstName" 
-                        placeholder="Ivan"
-                        value={values.firstName} 
+                        id="fullName" 
+                        name="fullName" 
+                        placeholder="Ivan Ivanov"
+                        value={values.fullName} 
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
-                    <div>
-                        <label htmlFor="last-name">Last Name:</label>
-                        <input 
-                        type="text" 
-                        id="lastName" 
-                        name="lastName" 
-                        placeholder="Ivanov"
-                        value={values.lastName} 
-                        onChange={changeHandler}
-                        />
-                    </div>
+                    {formErrors.fullName &&
+                        <p className={styles.formError}>
+                            {formErrors.fullName}
+                        </p>
+                    }
                     <div>
                         <label htmlFor="age">Age:</label>
                         <input 
@@ -53,8 +52,14 @@ export const Create = ({
                         placeholder="10"
                         value={values.age} 
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.age &&
+                        <p className={styles.formError}>
+                            {formErrors.age}
+                        </p>
+                    }
                     <div>
                         <label htmlFor="kid-img">Image:</label>
                         <input 
@@ -63,8 +68,15 @@ export const Create = ({
                         name="imageUrl" 
                         placeholder="Upload a photo..."
                         value={values.imageUrl} 
-                        onChange={changeHandler}/>
+                        onChange={changeHandler}
+                        onBlur={formValidate}
+                        />
                     </div>
+                    {formErrors.imageUrl &&
+                        <p className={styles.formError}>
+                            {formErrors.imageUrl}
+                        </p>
+                    }
                     <div>
                         <label htmlFor="score">Average Score:</label>
                         <input 
@@ -75,8 +87,14 @@ export const Create = ({
                         placeholder="5"
                         value={values.score} 
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.score &&
+                        <p className={styles.formError}>
+                            {formErrors.score}
+                        </p>
+                    }
                     <div>
                         <label htmlFor="grade">Grade:</label>
                         <input 
@@ -87,10 +105,16 @@ export const Create = ({
                         placeholder="6"
                         value={values.grade} 
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.grade &&
+                        <p className={styles.formError}>
+                            {formErrors.grade}
+                        </p>
+                    }
                     <div className={styles.btnSubmit}>
-                        <input type="submit" value="Add Student"/>
+                        <input type="submit" value="Add Student" disabled={disabled}/>
                     </div>
                 </div>
             </form>

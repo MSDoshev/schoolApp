@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { useForm } from "../../hooks/useForm";
 import { AuthContext } from "../../contexts/AuthContext";
 
-export const Register = () => {
+export const Register = ({
+    
+}) => {
 
-    const {onRegisterSubmit} = useContext(AuthContext)
+    const {onRegisterSubmit, formErrors, formValidate} = useContext(AuthContext)
     const {values, changeHandler, onSubmit} = useForm({
         email:'',
         imageUrl:'',
@@ -16,6 +18,8 @@ export const Register = () => {
 
     }, onRegisterSubmit)
 
+    const disabled = Object.keys(formErrors).some(key => formErrors[key]);
+    
     return (
         <section id="create-page" className={styles.auth}>
             <div className={styles.container}>
@@ -31,8 +35,15 @@ export const Register = () => {
                         placeholder="ivan@abv.bg"
                         value={values.email}
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.email &&
+                        <p className={styles.formError}>
+                            {formErrors.email}
+                        </p>
+                    }
+
                     <div>
                         <label htmlFor="fullName">Full Name:</label>
                         <input 
@@ -42,8 +53,14 @@ export const Register = () => {
                         placeholder="Ivan Ivanov"
                         value={values.fullName}
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.fullName &&
+                        <p className={styles.formError}>
+                            {formErrors.fullName}
+                        </p>
+                    }
                    
                     <div>
                         <label htmlFor="imageUrl">ImageUrl:</label>
@@ -54,8 +71,14 @@ export const Register = () => {
                         placeholder="http://"
                         value={values.imageUrl}
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.imageUrl &&
+                        <p className={styles.formError}>
+                            {formErrors.imageUrl}
+                        </p>
+                    }
                     <div>
                         <label htmlFor="password">Password:</label>
                         <input 
@@ -65,8 +88,15 @@ export const Register = () => {
                         placeholder="********"
                         value={values.password}
                         onChange={changeHandler}
+                        onBlur={formValidate}
                         />
                     </div>
+                    {formErrors.password &&
+                        <p className={styles.formError}>
+                            {formErrors.password}
+                            
+                        </p>
+                    }
                     <div>
                         <label htmlFor="repeatPassword">Repeat Password:</label>
                         <input 
@@ -87,7 +117,8 @@ export const Register = () => {
                     </div>
                     
                     <div className={styles.btnSubmit}>
-                        <input type="submit" value="Register"/>
+                    <input type="submit" value="Register" disabled={disabled} />
+
                     </div>
                 </div>
             </form>

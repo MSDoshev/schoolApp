@@ -29,6 +29,7 @@ import { AddPictures } from "./components/AddPictures/AddPictures";
 import { Profile } from "./components/Profile/Profile";
 import { EditUser } from "./components/EditUser/EditUser";
 import { Chat } from "./components/Chat/Chat";
+import { formValidationUtil } from "./utils/validation";
 
 
 
@@ -38,6 +39,22 @@ function App() {
   const [pictures, setPictures] = useState([]);
   const [messages, setMessages] = useState([]);
   const [auth, setAuth] = useState({});
+
+  const [formErrors, setFormErrors] = useState({
+    fullName:'',
+    email:'',
+    imageUrl:'',
+    password:'',
+    age:'',
+    score:'',
+    grade: '',
+    
+  })
+
+
+
+
+  
   const authService = authServiceFactory(auth.accessToken);
   const studentService = studentServiceFactory(auth.accessToken);
   const pictureService = galleryServiceFactory(auth.accessToken);
@@ -145,11 +162,33 @@ const onLogout = async () => {
 } 
 
 
+const formValidate =(e) =>{
+  const {name, value} = e.target;
+  const errors = {};
+  if (formValidationUtil[name]) {
+    const { validate, minLength, maxLength, min, errorMessage } = formValidationUtil[name];
+
+    if (minLength && value.length < minLength) {
+      errors[name] = errorMessage;
+    } else if (maxLength && value.length > maxLength) {
+      errors[name] = errorMessage;
+    } else if (min !== undefined && parseInt(value, 10) < min) {
+      errors[name] = errorMessage;
+    } else if (validate && !validate(value)) {
+      errors[name] = errorMessage;
+    }
+  }
+
+  setFormErrors(errors)
+
+}
 
 const context = {
   onLoginSubmit,
   onRegisterSubmit,
   onLogout,
+  formValidate,
+  formErrors,
   userId: auth._id,
   fullName:auth.fullName,
   imageUrl:auth.imageUrl,
@@ -171,7 +210,7 @@ const context = {
         <Route path='/gallery' element={<Gallery pictures={pictures}/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path ='/logout' element= {<Logout/> }/>
-        <Route path='/register' element={<Register/>}/>
+        <Route path='/register' element={<Register />}/>
         <Route path='/about' element={<About/>}/>
 
         <Route element={<RouteGuard />}>
