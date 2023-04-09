@@ -30,6 +30,7 @@ import { Profile } from "./components/Profile/Profile";
 import { EditUser } from "./components/EditUser/EditUser";
 import { Chat } from "./components/Chat/Chat";
 import { formValidationUtil } from "./utils/validation";
+import { NotFound } from "./components/NotFound/NotFound";
 
 
 
@@ -222,7 +223,10 @@ const context = {
           <Route path='/students' element={<Students students={students}/>}/>
           <Route path='/students/:studentId' element={<StudentDetails deleteStudent={deleteStudent}/>}/>
           <Route path='/students/:studentId/edit' element={<EditStudent onStudentEditSubmit={onStudentEditSubmit}/>}/>
+          
         </Route>
+
+        <Route path='*' element={<NotFound/>}/>
 
 
 

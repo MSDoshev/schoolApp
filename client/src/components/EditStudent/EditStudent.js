@@ -94,7 +94,7 @@ export const EditStudent = ({
                     <div>
                         <label htmlFor="score">Average Score:</label>
                         <input 
-                        type="number" 
+                        type="text" 
                         id="score" 
                         name="score" 
                         min="1" 

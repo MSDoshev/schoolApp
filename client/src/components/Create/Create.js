@@ -80,10 +80,9 @@ export const Create = ({
                     <div>
                         <label htmlFor="score">Average Score:</label>
                         <input 
-                        type="number" 
+                        type="text" 
                         id="score" 
                         name="score" 
-                        min="1" 
                         placeholder="5"
                         value={values.score} 
                         onChange={changeHandler}
@@ -102,6 +101,7 @@ export const Create = ({
                         id="grade" 
                         name="grade" 
                         min="1" 
+                        max="12"
                         placeholder="6"
                         value={values.grade} 
                         onChange={changeHandler}
